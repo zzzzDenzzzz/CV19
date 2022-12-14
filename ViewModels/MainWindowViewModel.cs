@@ -22,5 +22,14 @@ namespace CV19.ViewModels
             //}
             set => Set(ref _title, value);
         }
+
+        string _status = "Готов!";
+
+        /// <summary>статус программы</summary>
+        public string Status
+        {
+            get => _status;
+            set => Set(ref _status, value);
+        }
     }
 }
