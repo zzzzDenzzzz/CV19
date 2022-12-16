@@ -43,7 +43,7 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl>
-            <TabItem>
+            <TabItem Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <!--<Image Source=""></Image>-->
@@ -87,6 +87,10 @@
                         <oxy:LinearAxis Position="Left"/>
                         <oxy:LinearAxis Position="Bottom"/>
                     </oxy:Plot.Axes>
+                    <oxy:LineSeries Color="Red"
+                                    ItemsSource="{Binding Path=TestDataPoints}"
+                                    DataFieldX="XValue"
+                                    DataFieldY="YValue"/>
                 </oxy:Plot>
             </TabItem>
         </TabControl>
