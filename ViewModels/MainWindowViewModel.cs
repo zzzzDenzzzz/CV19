@@ -10,6 +10,16 @@ namespace CV19.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        int _selectedPageIndex;
+        /// <summary>
+        /// номер выбранной вкладки
+        /// </summary>
+        public int SelectedPageIndex
+        {
+            get => _selectedPageIndex;
+            set => Set(ref _selectedPageIndex, value);
+        }
+
         IEnumerable<DataPoint> _testDataPoints;
 
         /// <summary>Тестовый набор данных для визуализации графики</summary>
@@ -18,7 +28,6 @@ namespace CV19.ViewModels
             get => _testDataPoints;
             set => Set(ref _testDataPoints, value);
         }
-
 
         string _title = "Анализ статистики CV19";
 
@@ -57,9 +66,23 @@ namespace CV19.ViewModels
 
         bool CanCloseApplicationCommandExecute(object p) => true;
 
+        public ICommand ChangeTabIndexCommand { get; }
+
+        bool CanChangeTabIndexCommandExecute(object p) => _selectedPageIndex >= 0;
+
+        void OnChangeTabIndexCommandExecuted(object p)
+        {
+            if (p is null)
+            {
+                return;
+            }
+            SelectedPageIndex += Convert.ToInt32(p);
+        }
+
         public MainWindowViewModel()
         {
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
 
             var data_points = new List<DataPoint>((int)(360 / 0.1));
             for (var x = 0d; x <= 360; x += 0.1)
