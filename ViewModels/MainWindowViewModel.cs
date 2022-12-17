@@ -1,8 +1,11 @@
 ﻿using CV19.Infrastructure.Commands;
 using CV19.Models;
+using CV19.Models.Decanat;
 using CV19.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -10,6 +13,10 @@ namespace CV19.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        /*-------------------------------------------------------------------------------------------*/
+
+        public ObservableCollection<Group> Groups { get; }
+
         int _selectedPageIndex;
         /// <summary>
         /// номер выбранной вкладки
@@ -57,6 +64,8 @@ namespace CV19.ViewModels
             set => Set(ref _status, value);
         }
 
+        /*-------------------------------------------------------------------------------------------*/
+
         public ICommand CloseApplicationCommand { get; }
 
         void OnCloseApplicationCommandExecuted(object p)
@@ -79,6 +88,8 @@ namespace CV19.ViewModels
             SelectedPageIndex += Convert.ToInt32(p);
         }
 
+        /*-------------------------------------------------------------------------------------------*/
+
         public MainWindowViewModel()
         {
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
@@ -94,6 +105,27 @@ namespace CV19.ViewModels
             }
 
             TestDataPoints = data_points;
+
+            var studentIndex = 1;
+
+            var students = Enumerable.Range(1, 10).Select(i => new Student
+            {
+                Name = $"Name {studentIndex}",
+                Surname = $"Surname {studentIndex}",
+                Patronymic = $"Patronymic {studentIndex++}",
+                BirthDay = DateTime.Now,
+                Rating = 0
+            });
+
+            var groups = Enumerable.Range(1, 20).Select(i => new Group
+            {
+                Name = $"Группа {i}",
+                Students = new ObservableCollection<Student>(students)
+            });
+
+            Groups = new ObservableCollection<Group>(groups);
         }
+
+        /*-------------------------------------------------------------------------------------------*/
     }
 }
