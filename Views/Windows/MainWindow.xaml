@@ -76,26 +76,40 @@
                         TargetNullValue='Группа не выбрана'}">
                         <DataGrid ItemsSource="{Binding Path=SelectedGroup.Students}"
                                   AutoGenerateColumns="False"
-                                  IsReadOnly="True"
+                                  CanUserAddRows="False"
                                   GridLinesVisibility="Vertical"
                                   VerticalGridLinesBrush="LightBlue"
                                   AlternatingRowBackground="DarkGray">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Фамилия"
                                                     Binding="{Binding Path=Surname}"
-                                                    Width="Auto"/>
+                                                    Width="Auto"
+                                                    IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Имя"
-                                                    Binding="{Binding Path=Name}"/>
+                                                    Binding="{Binding Path=Name}"
+                                                    IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Отчество"
-                                                    Binding="{Binding Path=Patronymic}"/>
+                                                    Binding="{Binding Path=Patronymic}"
+                                                    IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Рейтинг"
-                                                    Binding="{Binding Path=Rating}"/>
+                                                    Binding="{Binding Path=Rating}"
+                                                    IsReadOnly="True"/>
                                 <DataGridTemplateColumn Header="Дата рождения">
-                                    <DataGridTemplateColumn.CellTemplate>
+                                    <!--<DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate DataType="decanat:Student">
                                             <DatePicker SelectedDate="{Binding Path=BirthDay}"/>
                                         </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>-->
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="decanat:Student">
+                                            <TextBlock Text="{Binding Path=BirthDay, StringFormat='dd.MM.yyyy'}"/>
+                                        </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate DataType="decanat:Student">
+                                            <DatePicker SelectedDate="{Binding Path=BirthDay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
                                 </DataGridTemplateColumn>
                                 <!--<DataGridTextColumn Header="Дата рождения"
                                                     Binding="{Binding Path=BirthDay,
