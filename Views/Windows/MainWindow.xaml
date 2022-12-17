@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:cmd="clr-namespace:CV19.Infrastructure.Commands"
+        xmlns:decanat="clr-namespace:CV19.Models.Decanat"
         xmlns:vm="clr-namespace:CV19.ViewModels"
         xmlns:local="clr-namespace:CV19"
         xmlns:oxy="http://oxyplot.org/wpf"
@@ -77,7 +78,7 @@
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True"
                                   GridLinesVisibility="Vertical"
-                                  VerticalGridLinesBrush="DarkGray"
+                                  VerticalGridLinesBrush="LightBlue"
                                   AlternatingRowBackground="DarkGray">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Фамилия"
@@ -89,9 +90,16 @@
                                                     Binding="{Binding Path=Patronymic}"/>
                                 <DataGridTextColumn Header="Рейтинг"
                                                     Binding="{Binding Path=Rating}"/>
-                                <DataGridTextColumn Header="Дата рождения"
+                                <DataGridTemplateColumn Header="Дата рождения">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="decanat:Student">
+                                            <DatePicker SelectedDate="{Binding Path=BirthDay}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <!--<DataGridTextColumn Header="Дата рождения"
                                                     Binding="{Binding Path=BirthDay,
-                                    StringFormat='dd.MM.yyyy'}"/>
+                                    StringFormat='dd.MM.yyyy'}"/>-->
                                 <!--<DataGridTextColumn Header="Группа"
                                                     Binding="{Binding DataContext.SelectedGroup.Name,
                                     RelativeSource={RelativeSource AncestorType=DataGrid}}"/>-->
