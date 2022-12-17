@@ -66,7 +66,8 @@
                     <GroupBox Grid.Column="0" Header="Группы">
                         <ListBox ItemsSource="{Binding Path=Groups}"
                                  DisplayMemberPath="Name"
-                                 SelectedItem="{Binding Path=SelectedGroup}"/>
+                                 SelectedItem="{Binding Path=SelectedGroup}"
+                                 SelectedIndex="0"/>
                     </GroupBox>
                     <GroupBox Grid.Column="1"
                               Header="{Binding Path=SelectedGroup.Name,
@@ -74,10 +75,14 @@
                         TargetNullValue='Группа не выбрана'}">
                         <DataGrid ItemsSource="{Binding Path=SelectedGroup.Students}"
                                   AutoGenerateColumns="False"
-                                  IsReadOnly="True">
+                                  IsReadOnly="True"
+                                  GridLinesVisibility="Vertical"
+                                  VerticalGridLinesBrush="DarkGray"
+                                  AlternatingRowBackground="DarkGray">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Фамилия"
-                                                    Binding="{Binding Path=Surname}"/>
+                                                    Binding="{Binding Path=Surname}"
+                                                    Width="Auto"/>
                                 <DataGridTextColumn Header="Имя"
                                                     Binding="{Binding Path=Name}"/>
                                 <DataGridTextColumn Header="Отчество"
@@ -85,10 +90,14 @@
                                 <DataGridTextColumn Header="Рейтинг"
                                                     Binding="{Binding Path=Rating}"/>
                                 <DataGridTextColumn Header="Дата рождения"
-                                                    Binding="{Binding Path=BirthDay}"/>
-                                <DataGridTextColumn Header="Группа"
+                                                    Binding="{Binding Path=BirthDay,
+                                    StringFormat='dd.MM.yyyy'}"/>
+                                <!--<DataGridTextColumn Header="Группа"
                                                     Binding="{Binding DataContext.SelectedGroup.Name,
-                                    RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    RelativeSource={RelativeSource AncestorType=DataGrid}}"/>-->
+                                <DataGridTextColumn Header="Заметки"
+                                                    Binding="{Binding Path=Description}"
+                                                    Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
