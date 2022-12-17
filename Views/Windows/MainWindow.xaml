@@ -70,11 +70,26 @@
                     </GroupBox>
                     <GroupBox Grid.Column="1"
                               Header="{Binding Path=SelectedGroup.Name,
-                        StringFormat='Студенты группы {0}', 
                         FallbackValue='Студенты',
                         TargetNullValue='Группа не выбрана'}">
-                        <DataGrid>
-                            
+                        <DataGrid ItemsSource="{Binding Path=SelectedGroup.Students}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фамилия"
+                                                    Binding="{Binding Path=Surname}"/>
+                                <DataGridTextColumn Header="Имя"
+                                                    Binding="{Binding Path=Name}"/>
+                                <DataGridTextColumn Header="Отчество"
+                                                    Binding="{Binding Path=Patronymic}"/>
+                                <DataGridTextColumn Header="Рейтинг"
+                                                    Binding="{Binding Path=Rating}"/>
+                                <DataGridTextColumn Header="Дата рождения"
+                                                    Binding="{Binding Path=BirthDay}"/>
+                                <DataGridTextColumn Header="Группа"
+                                                    Binding="{Binding DataContext.SelectedGroup.Name,
+                                    RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                            </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
                 </Grid>
