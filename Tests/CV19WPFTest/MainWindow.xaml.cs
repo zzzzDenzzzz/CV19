@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CV19
+namespace CV19WPFTest
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
